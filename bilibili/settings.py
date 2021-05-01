@@ -13,12 +13,12 @@ NEWSPIDER_MODULE = 'bilibili.spiders'
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 # 爬虫并发线程数，根据机器性能修改
-CONCURRENT_REQUESTS = 1024
+# CONCURRENT_REQUESTS = 16
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://doc.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-# DOWNLOAD_DELAY = 0.01
+DOWNLOAD_DELAY = 0.25
 # The download delay setting will honor only one of:
 # 每个domain并发量，设置为超大值，代表不限制
 CONCURRENT_REQUESTS_PER_DOMAIN = 100000000
@@ -60,20 +60,20 @@ ITEM_PIPELINES = {
 
 # 重试次数
 RETRY_ENABLED = True
-RETRY_TIMES = 10
+RETRY_TIMES = 5
 
 # 下载超时
-DOWNLOAD_TIMEOUT = 10
+DOWNLOAD_TIMEOUT = 5
 
 # log日志设置
 LOG_FILE = 'mySpider.log'
-LOG_LEVEL = 'WARNING'
+LOG_LEVEL = 'DEBUG'
 
 # mongodb设置
-MONGO_HOST = "ip"
+MONGO_HOST = "192.168.228.100"
 MONGO_PORT = 27017
-MONGO_USERNAME = "user"  # 若无为None
-MONGO_PASSWORD = "password"  # 若无为None
+MONGO_USERNAME = "bili"  # 若无为None
+MONGO_PASSWORD = "123456"  # 若无为None
 
 #########################################################################
 # Scrapy-Rdis配置项
@@ -110,17 +110,17 @@ SCHEDULER_QUEUE_CLASS = 'scrapy_redis.queue.PriorityQueue'
 
 # 指定连接到redis时使用的端口和地址（可选）
 # 与代理ip公用设置
-REDIS_HOST = 'ip'
+REDIS_HOST = '192.168.228.100'
 REDIS_PORT = 6379
-REDIS_PASSWORD = 'password'  # 无密码为None
+REDIS_PASSWORD = '123456'  # 无密码为None
 REDIS_PROXY_DB = 10
 
 # 指定用于连接redis的URL（可选）
 # 如果设置此项，则此项优先级高于设置的REDIS_HOST 和 REDIS_PORT
-REDIS_URL = 'redis://user:password@ip:6379'
+# REDIS_URL = 'redis://user:password@ip:6379'
 
 # 自定义的redis参数（连接超时之类的）
-# REDIS_PARAMS  = {}
+REDIS_PARAMS  = {"password":"123456",}
 
 # 自定义redis客户端类
 # REDIS_PARAMS['redis_cls'] = 'myproject.RedisClient'
@@ -134,3 +134,9 @@ REDIS_URL = 'redis://user:password@ip:6379'
 
 # 设置redis使用utf-8之外的编码
 # REDIS_ENCODING = 'latin1'
+
+# 设置爬取限制，用作调试爬虫是否正常运行（主要为检测ip被封、api是否有效）
+# CLOSESPIDER_TIMEOUT = 30
+CLOSESPIDER_ITEMCOUNT = 150
+# CLOSESPIDER_ERROROUT = 10
+# CLOSESPIDER_PAGEOUT = 5

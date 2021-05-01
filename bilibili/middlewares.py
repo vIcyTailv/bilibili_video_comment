@@ -25,13 +25,11 @@ class UserRetryMiddleware(RetryMiddleware):
         print(request.url)
         redis_db.lpush("bilibili_spider:strat_urls", request.url)
 
-
 class UserAgentmiddleware(UserAgentMiddleware):
     # 随机user agent的中间件
     def process_request(self, request, spider):
         agent = random.choice(agents)
         request.headers["User-Agent"] = agent
-
 
 class BilibiliDownloaderMiddleware(object):
     @classmethod
@@ -57,7 +55,6 @@ class BilibiliDownloaderMiddleware(object):
         if proxy:
             proxy = proxy[0].decode()
             spider.logger.info('使用代理[%s]访问[%s]' % (proxy, request.url))
-
             request.meta['proxy'] = proxy
         else:
             spider.logger.warning('不使用代理访问[%s]' % request.url)

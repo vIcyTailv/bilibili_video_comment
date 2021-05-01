@@ -1,17 +1,10 @@
-#!/usr/bin/env python
-# encoding: utf-8 
-# @version: 
-# @author: liduo
-# @license: 
-# @file: start.py
-# @time: 2018/5/30 下午10:24
 from multiprocessing import Pool
 import os
 
 
 def run():
     # 发送命令，启动一个爬虫
-    cmd = "scrapy crawl bilibili_spider"
+    cmd = "scrapy crawl reply_spider"
     os.system(cmd)
 
 
@@ -26,7 +19,8 @@ def main(number):
 
 if __name__ == '__main__':
     import sys
-
+    # debug 设置开启 num 个进程
+    # num = 16
     # 接收传入的参数，代表开启几个scrapy-redis进程
     num = sys.argv[1]
     num = int(num)

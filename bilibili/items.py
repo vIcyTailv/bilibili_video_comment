@@ -8,18 +8,14 @@
 import scrapy
 
 
-class BilibiliItem(scrapy.Item):
+class ReplyItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     pass
 
-
-class BiliBiliData(scrapy.Item):
-    aid = scrapy.Field()
-    view = scrapy.Field()
-    danmaku = scrapy.Field()
-    reply = scrapy.Field()
-    favorite = scrapy.Field()
-    coin = scrapy.Field()
-    share = scrapy.Field()
-    time = scrapy.Field()
+class ReplyData(scrapy.Item):
+    oid = scrapy.Field()
+    rpid = scrapy.Field()
+    uname = scrapy.Field()
+    mid = scrapy.Field()
+    message = scrapy.Field()

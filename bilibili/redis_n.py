@@ -1,17 +1,9 @@
-#!/usr/bin/env python
-# encoding: utf-8 
-# @version: 
-# @author: liduo
-# @license: 
-# @file: redis_n.py
-# @time: 2018/5/30 下午5:05
 from redis import StrictRedis
 import settings
 from concurrent.futures import ThreadPoolExecutor
 
-
 def run(t):
-    # 向redis传入strat_urls
+    # 向redis传入start_urls
     start = t[0]
     stop = t[1]
     redis_db = StrictRedis(
@@ -20,12 +12,10 @@ def run(t):
         password=settings.REDIS_PASSWORD,
         db=0,
     )
-
+    # 向redis中写入url队列，等待spider启动后使用
     for i in range(start, stop):
         print(i)
-
-        redis_db.lpush("bilibili_spider:strat_urls", "https://api.bilibili.com/x/web-interface/archive/stat?aid=%s" % i)
-
+        redis_db.lpush("reply_spider:start_urls", "https://api.bilibili.com/x/v2/reply?type=1&sort=2&oid={}&pn={}" .format(i,1))
 
 def main(start, stop, step):
     # 开启多线程
@@ -51,7 +41,10 @@ if __name__ == '__main__':
     # start：起始aid
     # stop：结束aid
     # step：每个线程负责aid的数量
-    start_num = int(sys.argv[1])
-    stop_num = int(sys.argv[2])
-    step_num = int(sys.argv[3])
+    # start_num = int(sys.argv[1])
+    # stop_num = int(sys.argv[2])
+    # step_num = int(sys.argv[3])
+    start_num = 460363247
+    stop_num = 460363248
+    step_num = 1
     main(start_num, stop_num, step_num)

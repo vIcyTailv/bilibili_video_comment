@@ -20,9 +20,8 @@ class BilibiliPipeline(object):
         db.authenticate(settings["MONGO_USERNAME"], settings["MONGO_PASSWORD"])
         # 连接集合
         # 根据当前日期建立集合
-        col_name = "b_video_stat_" + time.strftime("%Y%m%d")
+        col_name = "b_video_reply_" + time.strftime("%Y%m%d")
         col = db[col_name]
-
         self.col = col
 
     def process_item(self, item, spider):

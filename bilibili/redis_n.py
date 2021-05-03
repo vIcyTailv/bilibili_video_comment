@@ -44,7 +44,7 @@ if __name__ == '__main__':
     # start_num = int(sys.argv[1])
     # stop_num = int(sys.argv[2])
     # step_num = int(sys.argv[3])
-    start_num = 460363247
-    stop_num = 460363248
-    step_num = 1
+    start_num = 460363500
+    stop_num = 460364500
+    step_num = 100
     main(start_num, stop_num, step_num)
